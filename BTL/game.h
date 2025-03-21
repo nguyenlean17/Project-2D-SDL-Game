@@ -10,7 +10,7 @@ class Game
 public: 
 	Game();
 	~Game();
-	
+
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullScreen);
 	void handleEvents();
 	void update();
@@ -23,6 +23,7 @@ public:
 		return isRunning;	
 	}
 	static SDL_Renderer* renderer;
+	static SDL_Event event;
 private:
 	int count=0;
 	bool isRunning;

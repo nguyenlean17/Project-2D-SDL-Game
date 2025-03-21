@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ECS">
+      <UniqueIdentifier>{5fadeb41-b63d-4dfe-a107-927fc080858d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -45,6 +51,18 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ecs.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\component.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\TransformComponent.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\SpriteComponent.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

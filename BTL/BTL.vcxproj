@@ -138,13 +138,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ecs.h" />
+    <ClInclude Include="ECS\component.h" />
+    <ClInclude Include="ECS\TransformComponent.h" />
+    <ClInclude Include="ECS\SpriteComponent.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

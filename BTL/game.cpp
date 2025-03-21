@@ -50,6 +50,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	player.addComponent<TransformComponent>(10,100);
 	player.addComponent<SpriteComponent>("assets/char.png");
+	player.addComponent<KeyboardController>();
 
 }
 void Game::handleEvents()
@@ -70,11 +71,7 @@ void Game::update()
 {
 	manager.refresh();
 	manager.update();
-	player.getComponent<TransformComponent>().position.Add(Vector2D(5, 0));
-	if (player.getComponent<TransformComponent>().position.x > 100)
-	{
-		player.getComponent<SpriteComponent>().setTex("assets/enemy.png");
-	}
+
 }
 void Game::render()
 {

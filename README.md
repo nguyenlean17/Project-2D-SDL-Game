@@ -1,1 +1,1 @@
-# BTL
+# Project SDL2 Game

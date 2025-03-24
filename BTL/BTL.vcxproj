@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
@@ -141,8 +142,10 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ecs.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="ECS\ColliderComponent.h" />
     <ClInclude Include="ECS\component.h" />
+    <ClInclude Include="ECS\ecs.h" />
     <ClInclude Include="ECS\KeyboardController.h" />
     <ClInclude Include="ECS\TransformComponent.h" />
     <ClInclude Include="ECS\SpriteComponent.h" />

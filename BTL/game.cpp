@@ -2,16 +2,16 @@
 #include "TextureManager.h"
 #include "map.h"
 #include "ECS/component.h"
-#include "Vector2D.h";
+#include "Vector2D.h"
+#include "Collision.h"
 using namespace std;
-
-
 
 Map* map;
 Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 auto& player(manager.addEntity());
+auto& wall(manager.addEntity());
 Game::Game()
 {}
 Game::~Game()
@@ -38,7 +38,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		if (renderer)
 		{
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-			cout << "renderer" << endl;
+			cout << "rendered stuffs need rendering" << endl;
 
 		}
 		isRunning = true;
@@ -51,7 +51,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<TransformComponent>(10,100);
 	player.addComponent<SpriteComponent>("assets/char.png");
 	player.addComponent<KeyboardController>();
-
+	player.addComponent<ColliderComponent>("player");
+	
+	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+	wall.addComponent<SpriteComponent>("assets/water.png");
+	wall.addComponent<ColliderComponent>("wall");
 }
 void Game::handleEvents()
 {
@@ -71,7 +75,11 @@ void Game::update()
 {
 	manager.refresh();
 	manager.update();
-
+	if(Collision::AABB(player.getComponent<ColliderComponent>().collider,wall.getComponent<ColliderComponent>().collider))
+	{
+		cout<<"Wall Hit! "<<endl;
+		player.getComponent<TransformComponent>().scale = 1;
+	}
 }
 void Game::render()
 {
@@ -86,5 +94,5 @@ void Game::clean()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
-	cout << "cleaned" << endl;
+	cout << "quitted out n cleaned" << endl;
 }

@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include "game.h"
+#include "../game.h"
 #include <memory>
 #include <algorithm>
 #include <bitset>

@@ -30,7 +30,9 @@ public:
 			case SDLK_d:
 				transform->velocity.x = 1;
 				break;
+		
 			default:
+		
 				break;
 			}
 		}

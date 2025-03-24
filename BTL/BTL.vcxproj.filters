@@ -36,6 +36,9 @@
     <ClCompile Include="Vector2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -49,9 +52,6 @@
     </ClInclude>
     <ClInclude Include="map.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ecs.h">
-      <Filter>Source Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="ECS\component.h">
       <Filter>Source Files\ECS</Filter>
@@ -67,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="ECS\KeyboardController.h">
       <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\ColliderComponent.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS\ecs.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

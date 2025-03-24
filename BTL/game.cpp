@@ -8,10 +8,25 @@ using namespace std;
 
 Map* map;
 Manager manager;
+
+
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
+
+
+vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity());
 auto& wall(manager.addEntity());
+
+enum groupLabels : size_t
+{
+	groupMap,
+	groupPlayers,
+	groupEnemies,
+	groupColliders
+};
+
+
 Game::Game()
 {}
 Game::~Game()
@@ -46,7 +61,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 	
 	map = new Map();
-	//
+	//ecs
+	
+
+	Map::LoadMap("assets/p16x16.map", 16, 16);
 
 	player.addComponent<TransformComponent>(10,100);
 	player.addComponent<SpriteComponent>("assets/char.png");
@@ -75,17 +93,15 @@ void Game::update()
 {
 	manager.refresh();
 	manager.update();
-	if(Collision::AABB(player.getComponent<ColliderComponent>().collider,wall.getComponent<ColliderComponent>().collider))
+	for (auto cc : colliders)
 	{
-		cout<<"Wall Hit! "<<endl;
-		player.getComponent<TransformComponent>().scale = 1;
+		Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
 	}
 }
 void Game::render()
 {
 	SDL_RenderClear(renderer);
 	//render cac thu o day
-	map->DrawMap();
 	manager.draw();
 	SDL_RenderPresent(renderer);
 }
@@ -95,4 +111,9 @@ void Game::clean()
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 	cout << "quitted out n cleaned" << endl;
+}
+void Game::AddTile(int id, int x, int y)
+{
+	auto& tile(manager.addEntity());
+	tile.addComponent<TileComponent>(x, y, 32, 32, id);
 }

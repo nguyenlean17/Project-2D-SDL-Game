@@ -126,7 +126,7 @@ public:
 	void draw()
 	{
 		for (auto& e : entities) e->draw();
-	}
+	}	
 
 	void refresh()
 	{
@@ -160,7 +160,7 @@ public:
 
 	Entity& addEntity()
 	{
-		Entity* e = new Entity();
+		Entity* e = new Entity(*this);
 		unique_ptr<Entity> uPtr{ e };
 		entities.emplace_back(move(uPtr));
 		return *e;

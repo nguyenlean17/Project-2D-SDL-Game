@@ -1,5 +1,17 @@
 # Project Game 2D using SDL2 and C++
 ## 1.	Thông tin về game: 
+• Tên game : Banish The Lord 
+
+• Giải thích tên game : Để phù hợp với viết tắt "BTL" (Bài tập lớn).
+
+•	Link Video Demo : https://www.youtube.com/watch?v=ID8A36aYPJg
+
+•	Điều khiển : 
+
+-	Ở Menu : di chuyển giữa các lựa chọn bằng W và S, chọn bằng E.
+
+-	Ingame : Di chuyển né đạn bằng WASD, nhắm và bắn bằng chuột trái.
+
 
 •	Link Github game : https://github.com/nguyenlean17/Project-2D-SDL-Game
 

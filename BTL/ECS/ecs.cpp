@@ -2,6 +2,6 @@
 
 void Entity::addGroup(Group mGroup)
 {
-	groupBitSet[mGroup] = true;
+	groupBitset[mGroup] = true;
 	manager.AddToGroup(this, mGroup);
 }

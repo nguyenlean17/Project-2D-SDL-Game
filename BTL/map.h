@@ -6,14 +6,16 @@ class Map
 {
 public:
 
-	Map();
+	Map(string tID,int ms, int ts );
 	~Map();
 
-	static void LoadMap(string path, int sizeX, int sizeY);
-
+	void LoadMap(string path, int sizeX, int sizeY);
+	void AddTile(int srcX, int srcY, int xpos, int ypos);
 private:
-
-
+	string texID;
+	int mapScale;
+	int tileSize;
+	int scaledSize;	
 
 
 };

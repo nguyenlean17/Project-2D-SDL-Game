@@ -13,8 +13,8 @@ void GameObject::Update()
 	xpos++;
 	ypos++;
 
-	srcRect.h = 23;
-	srcRect.w = 14;
+	srcRect.h = 32;
+	srcRect.w = 32;
 	srcRect.x = 0;
 	srcRect.y = 0;
 

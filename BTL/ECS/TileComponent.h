@@ -7,21 +7,21 @@ class TileComponent : public Component
 public:
 	SDL_Texture* texture;
 	SDL_Rect srcRect, desRect;
+	Vector2D position;
 	TileComponent() = default;
 	~TileComponent()
 	{
 		SDL_DestroyTexture(texture);
 	}
-	TileComponent(int srcX, int srcY, int x, int y, const char* path)
+	TileComponent(int srcX, int srcY, int x, int y,int tsize,int tscale, string id)
 	{
-		texture = TextureManager::LoadTexture(path);
-
+		texture = Game::assets->GetTexture(id);
 		srcRect.x = srcX;
 		srcRect.y = srcY;
-		srcRect.w = srcRect.h = 32;
-		desRect.x = x;
-		desRect.y = y;
-		desRect.w = desRect.h = 64;
+		srcRect.w = srcRect.h = tsize;
+		position.x = static_cast<float>(x);
+		position.y = static_cast<float>(y);
+		desRect.w = desRect.h = tsize * tscale;
 	}
 	void draw() override
 	{

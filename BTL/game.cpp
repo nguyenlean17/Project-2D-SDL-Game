@@ -41,6 +41,7 @@ Game::~Game()
 {}
 void Game::init(const char* title, int width, int height, bool fullscreen) //hàm khởi tạo
 {
+
 	int flags = 0;
 	if (fullscreen)
 	{
@@ -133,7 +134,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) //hà
 	assets->AddTexture("straightbig", "assets/straightbig.png");
 	assets->AddTexture("bossbig", "assets/bossbig.png");
 	assets->AddTexture("gameover", "assets/gameover.png");
-	assets->AddTexture("gamewon", "assets/gamewon.png");
+	assets->AddTexture("gamewon", "assets/gamewin.png");
 	assets->AddTexture("maptroll", "assets/map1.png");
 	assets->AddTexture("map1", "assets/71.png");
 	assets->AddTexture("map3", "assets/81.png");
@@ -305,7 +306,7 @@ void Game::applyDifficulty()
 		boss.getComponent<HealthComponent>().health = 250;
 		map3.addComponent<SpriteComponent>("map");
 		boss.addComponent<SpriteComponent>("boss", true);
-		boss.getComponent<BossAIComponent>().projSpeed = 2.3f;
+		boss.getComponent<BossAIComponent>().projSpeed = 2.2f;
 		boss.getComponent<BossAIComponent>().fireRate =2.3;
 		break;
 	case GameDifficulty::Hard:
@@ -315,8 +316,8 @@ void Game::applyDifficulty()
 		//map3.addComponent<SpriteComponent>("maptroll");
 		map3.addComponent<SpriteComponent>("map3");
 		//boss.addComponent<TransformComponent>(500, 300,512,512, 1);
-		boss.getComponent<BossAIComponent>().projSpeed = 3.0f;
-		boss.getComponent<BossAIComponent>().fireRate = 3.2; // Shorter cooldown
+		boss.getComponent<BossAIComponent>().projSpeed = 2.0f;
+		boss.getComponent<BossAIComponent>().fireRate = 3.1; // Shorter cooldown
 		break;
 	}
 }

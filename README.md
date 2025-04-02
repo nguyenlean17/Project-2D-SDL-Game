@@ -4,6 +4,15 @@
 
 • Giải thích tên game : Để phù hợp với viết tắt "BTL" (Bài tập lớn).
 
+•	Link Video Demo : https://www.youtube.com/watch?v=ID8A36aYPJg
+
+•	Điều khiển : 
+
+-	Ở Menu : di chuyển giữa các lựa chọn bằng W và S, chọn bằng E.
+
+-	Ingame : Di chuyển né đạn bằng WASD, nhắm và bắn bằng chuột trái.
+
+
 •	Link Github game : https://github.com/nguyenlean17/Project-2D-SDL-Game
 
 •	Các nguồn tham khảo : Được truyền cảm hứng bởi các game Rogue-like như Souls Knight, Dark Souls, Binding of Isaac. 

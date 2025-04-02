@@ -1,5 +1,8 @@
 # Project Game 2D using SDL2 and C++
 ## 1.	Thông tin về game: 
+• Tên game : Banish The Lord 
+
+• Giải thích tên game : Để phù hợp với viết tắt "BTL" (Bài tập lớn).
 
 •	Link Github game : https://github.com/nguyenlean17/Project-2D-SDL-Game
 

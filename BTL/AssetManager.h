@@ -18,9 +18,7 @@ public:
 	//gameobjects
 	//các hàm tạo các loại đạn của boss
 	void CreateProjectile(Vector2D pos, Vector2D vel, float range, float speed, Group projectileGroup, string textureID); 
-
-
-
+	void CreateBossSeekingStraightProjectile(Vector2D pos, float range, float speed, Group projectileGroup, string textureID);
 	void CreateSpreadProjectile(Vector2D pos, Vector2D vel, float range, float speed, Group projectileGroup, string textureID);
 	void CreateRingProjectile(Vector2D pos, Vector2D vel, float range, float speed, Group projectileGroup, string textureID);
 	void CreatePlayerSeekingStraightProjectile(Vector2D pos, float range, float speed, Group projectileGroup, string textureID);

@@ -8,8 +8,6 @@ void BossAIComponent::init()
 {
     transform = &entity->getComponent<TransformComponent>();
     lastShotTime = SDL_GetTicks(); 
-    fireRate = 3; 
-    projSpeed = 3;
 }
 
 
@@ -22,7 +20,6 @@ void BossAIComponent::update()
 
     if (timeSinceLastShot >= (1.0f / fireRate))
     {
-        cout << "Boss is about to shoot projectile!" << endl;
         int randomProjectileType = rand() % 4;
         Vector2D projectileSpawnPos = transform->position;
 
@@ -32,20 +29,17 @@ void BossAIComponent::update()
 
         switch (randomProjectileType) {
         case 0:
-            assets->CreateBigStraightProjectile(projectileSpawnPos, 500,projSpeed-1, Game::groupBossProjectiles, "bossbig");
-            cout << "Boss shot: Straight" << endl;
+            assets->CreateBigStraightProjectile(projectileSpawnPos, 300, projSpeed-1, Game::groupBossProjectiles, "bossbig");
             break;
         case 1:
-
-            assets->CreateRingProjectile(projectileSpawnPos, Vector2D(1, 1), 1000, 1, Game::groupBossProjectiles, "bossring");
-            cout << "Boss shot: Ring" << endl;
+            assets->CreateRingProjectile(projectileSpawnPos, Vector2D(1, 1), 200, 1, Game::groupBossProjectiles, "bossring");
             break;
         case 2:
 
-            assets->CreateSpreadProjectile(projectileSpawnPos, Vector2D(1, 1), 2800, 10, Game::groupBossProjectiles, "bossspread");
+            assets->CreateSpreadProjectile(projectileSpawnPos, Vector2D(1, 1), 3000, 10, Game::groupBossProjectiles, "bossspread");
             break;
         default:
-            assets->CreatePlayerSeekingStraightProjectile(projectileSpawnPos, 500, projSpeed, Game::groupBossProjectiles, "bosstraight");
+            assets->CreatePlayerSeekingStraightProjectile(projectileSpawnPos, 300, projSpeed, Game::groupBossProjectiles, "bosstraight");
             break;
     }
         lastShotTime = currentTime;

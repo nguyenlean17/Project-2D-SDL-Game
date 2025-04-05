@@ -30,6 +30,7 @@ auto& player(manager.addEntity());
 auto& map3(manager.addEntity());
 auto& banner(manager.addEntity());
 auto& boss(manager.addEntity());
+auto& boss2(manager.addEntity());
 auto& spawnpoint(manager.addEntity());
 auto& gameover(manager.addEntity());;
 auto& gameovers(manager.getGroup(Game::groupLost));
@@ -45,7 +46,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) //hà
 	int flags = 0;
 	if (fullscreen)
 	{
-		flags = SDL_WINDOW_FULLSCREEN;
+		flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
 	}
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -125,7 +126,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) //hà
 	assets->AddTexture("map", "assets/61.png");
 	assets->AddTexture("boss", "assets/squishy2.png");
 	assets->AddTexture("boss1", "assets/squishy1.png");
-	assets->AddTexture("boss2", "assets/darksoul.png");
+	assets->AddTexture("boss2", "assets/bosss3.png");
 	assets->AddTexture("fire", "assets/fire.png");
 	assets->AddTexture("bosstraight", "assets/bossstraight.png");
 	assets->AddTexture("bossring", "assets/bossring.png");
@@ -135,7 +136,6 @@ void Game::init(const char* title, int width, int height, bool fullscreen) //hà
 	assets->AddTexture("bossbig", "assets/bossbig.png");
 	assets->AddTexture("gameover", "assets/gameover.png");
 	assets->AddTexture("gamewon", "assets/gamewin.png");
-	assets->AddTexture("maptroll", "assets/map1.png");
 	assets->AddTexture("map1", "assets/71.png");
 	assets->AddTexture("map3", "assets/81.png");
 	map2 = new Map("assets/terrain_sse.png",3,32);
@@ -184,6 +184,13 @@ void Game::init(const char* title, int width, int height, bool fullscreen) //hà
 	boss.addComponent<HealthComponent>(200, 200);
 	boss.addComponent<HealthBarComponent>();
 
+	boss2.addComponent<TransformComponent>(900, 450, 64,80, 3);
+	boss2.addComponent<SpriteComponent>("boss2", true);
+	boss2.addComponent<ColliderComponent>("boss");
+	boss2.addComponent<BossAIComponent>(assets);
+	boss2.addComponent<HealthComponent>(200, 200);
+	boss2.addComponent<HealthBarComponent>();
+
 	map3.addComponent<TransformComponent>(0, 0, 1080, 1920, 1);
 	map3.addComponent<SpriteComponent>("map", false);
 	map3.addGroup(groupMaps);
@@ -208,8 +215,8 @@ void Game::handleEvents()
 	case SDL_KEYDOWN: 
 		switch (event.key.keysym.sym) {
 		case SDLK_ESCAPE: 
-			cout << "ESC key pressed in handleEvents - Quitting!" << endl;
-			isRunning = false;
+			cout << "ESC key pressed" << endl;
+			currentGameState=GameState::MainMenu;
 			break;
 		case SDLK_w: 
 			selectedMenuItem--;
@@ -237,7 +244,7 @@ void Game::handleEvents()
 			}
 			cout << "Selected Menu Item: " << selectedMenuItem << endl; 
 			break;
-		case SDLK_e:
+			case SDLK_e:
 			if (currentGameState == GameState::LevelSelect) {
 				if (selectedMenuItem == 0) {
 					cout << "Level 1" << endl;
@@ -258,7 +265,7 @@ void Game::handleEvents()
 			}
 			if (currentGameState == GameState::MainMenu) {
 				if (selectedMenuItem == 0) { 
-					cout << "Play Game selected - Switching to Playing state!" << endl;
+					cout << "Play Game selected" << endl;
 					currentGameState = GameState::LevelSelect; 
 				}
 				else if (selectedMenuItem == 1) { 
@@ -268,13 +275,13 @@ void Game::handleEvents()
 			}
 			else if (currentGameState == GameState::GameOver) {
 				if (selectedMenuItem == 0) {
-					cout << "Play Again selected - Switching to Playing state!" << endl;
+					cout << "Play Again selected" << endl;
 					currentGameState = GameState::MainMenu;
 					banner.addComponent<SpriteComponent>("banner", false);
 					boss.getComponent<HealthComponent>().health = 250;
 				}
 				else if (selectedMenuItem == 1) {
-					cout << "Quit selected - Exiting game!" << endl;
+					cout << "Quit selected" << endl;
 					isRunning = false;
 				}
 
@@ -306,18 +313,16 @@ void Game::applyDifficulty()
 		boss.getComponent<HealthComponent>().health = 250;
 		map3.addComponent<SpriteComponent>("map");
 		boss.addComponent<SpriteComponent>("boss", true);
-		boss.getComponent<BossAIComponent>().projSpeed = 2.2f;
-		boss.getComponent<BossAIComponent>().fireRate =2.3;
+		boss.getComponent<BossAIComponent>().projSpeed = 2.0f;
+		boss.getComponent<BossAIComponent>().fireRate =1.8f;
 		break;
 	case GameDifficulty::Hard:
 		// Make boss harder
 		boss.getComponent<HealthComponent>().maxHealth = 300;
 		boss.getComponent<HealthComponent>().health = 300;
-		//map3.addComponent<SpriteComponent>("maptroll");
 		map3.addComponent<SpriteComponent>("map3");
-		//boss.addComponent<TransformComponent>(500, 300,512,512, 1);
-		boss.getComponent<BossAIComponent>().projSpeed = 2.0f;
-		boss.getComponent<BossAIComponent>().fireRate = 3.1; // Shorter cooldown
+		boss.getComponent<BossAIComponent>().projSpeed = 2.5f;
+		boss.getComponent<BossAIComponent>().fireRate = 2.5f;
 		break;
 	}
 }
@@ -421,15 +426,15 @@ void Game::render()
 	//render cac thu o day
 	if (currentGameState == GameState::MainMenu) {
 		
-		menuRenderer->renderMenu(selectedMenuItem, currentGameState); // Call the MenuRenderer to render the menu
+		menuRenderer->renderMenu(selectedMenuItem, currentGameState);
 	}
 	else if (currentGameState == GameState::GameWin) {
 
-		menuRenderer->renderMenu(selectedMenuItem, GameState::GameOver); // Call the MenuRenderer to render the menu
+		menuRenderer->renderMenu(selectedMenuItem, GameState::GameOver); 
 	}
 	else if (currentGameState == GameState::LevelSelect) {
 
-		menuRenderer->renderMenu(selectedMenuItem, currentGameState); // Call the MenuRenderer to render the menu
+		menuRenderer->renderMenu(selectedMenuItem, currentGameState);
 	}
 	else if (currentGameState == GameState::Playing) {
      

@@ -71,7 +71,7 @@ void AssetManager::CreateRingProjectile(Vector2D pos, Vector2D vel, float range,
 
 void AssetManager::CreatePlayerSeekingStraightProjectile(Vector2D pos, float range, float speed, Group projectileGroup, string textureID)
 {
-    
+    //lay vi tri hien tai cua nguoi choi
         Vector2D playerPos;
         for (auto& p : manager->getGroup(Game::groupPlayers)) 
         {
@@ -79,7 +79,7 @@ void AssetManager::CreatePlayerSeekingStraightProjectile(Vector2D pos, float ran
             break; 
         }
 
-    
+		// tính toán hướng từ vị trí của boss đến vị trí của người chơi
         Vector2D directionToPlayer = playerPos - pos; 
         directionToPlayer.Normalize();
 
@@ -88,7 +88,7 @@ void AssetManager::CreatePlayerSeekingStraightProjectile(Vector2D pos, float ran
 
    
 
-      
+		// tạo một projectile với vị trí, tốc độ và hướng đã tính toán
         auto& projectile(manager->addEntity());
         projectile.addComponent<TransformComponent>(pos.x, pos.y, 16, 16, 2);
         projectile.addComponent<SpriteComponent>(textureID, true);
@@ -178,4 +178,33 @@ void AssetManager::AddSound(std::string id, const char* path)
 Mix_Chunk* AssetManager::GetSound(std::string id)
 {
     return sounds[id];
+}
+
+void AssetManager::CreateBossSeekingStraightProjectile(Vector2D pos, float range, float speed, Group projectileGroup, string textureID)
+{
+    //lay vi tri hien tai cua nguoi choi
+    Vector2D playerPos;
+    for (auto& p : manager->getGroup(Game::groupEnemies))
+    {
+        playerPos = p->getComponent<TransformComponent>().position;
+        break;
+    }
+
+    // tính toán hướng từ vị trí của boss đến vị trí của người chơi
+    Vector2D directionToPlayer = playerPos - pos;
+    directionToPlayer.Normalize();
+
+
+    Vector2D seekingVelocity = directionToPlayer * speed;
+
+
+
+    // tạo một projectile với vị trí, tốc độ và hướng đã tính toán
+    auto& projectile(manager->addEntity());
+    projectile.addComponent<TransformComponent>(pos.x, pos.y, 16, 16, 2);
+    projectile.addComponent<SpriteComponent>(textureID, true);
+    projectile.addComponent<ColliderComponent>("projectile");
+    projectile.addComponent<ProjectileComponent>(range, speed, seekingVelocity);
+
+    projectile.addGroup(projectileGroup);
 }

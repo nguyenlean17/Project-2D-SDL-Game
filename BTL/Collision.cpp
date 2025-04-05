@@ -25,3 +25,4 @@ bool Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB)
 		return false;
 	}
 }
+ //thuat toan tinh va cham
